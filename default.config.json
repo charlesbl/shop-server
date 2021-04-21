@@ -1,0 +1,7 @@
+{
+    "rootFolder": "/media/charles/Data/Download",
+    "secret": "arz",
+    "realDebridTokenAPI": "UJSXPGJ6J45HCKZTS4GGHYF7JS3XYISXNKKLKFGGKV72BGPW6OJQ",
+    "port": "8080",
+    "aria2Port": "6800"
+}
