@@ -1,25 +1,22 @@
 import express from "express";
 import { v4 as uuid } from 'uuid';
-import session from "express-session";
+import Product from "./shared/product";
+
+const productList: Product[] = [];
+productList.push(new Product("Produit A", "5126"));
+productList.push(new Product("Product B", "3215"));
+productList.push(new Product("Eau evian", "985"));
+productList.push(new Product("produit test", "21585"));
 
 const port = 8080;
-
-// Server
 const app = express();
 
-app.use(session({
-    genid: () => uuid(),
-    secret: 'd65f4h5d4fg',
-    resave: false,
-    saveUninitialized: true
-}));
-
 app.get("/", (req, res) => {
-    res.send("hello" + req.sessionID);
+    res.send("hello");
 });
 
-app.get("/register", (req, res) => {
-    res.send(uuid());
+app.get("/products", (req, res) => {
+    res.json(productList);
 });
 
 app.listen(port, () => {
