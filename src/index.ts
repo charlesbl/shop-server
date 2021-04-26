@@ -1,22 +1,25 @@
 import express from "express";
-import { v4 as uuid } from 'uuid';
-import Product from "./shared/product";
-
-const productList: Product[] = [];
-productList.push(new Product("Produit A", "5126"));
-productList.push(new Product("Product B", "3215"));
-productList.push(new Product("Eau evian", "985"));
-productList.push(new Product("produit test", "21585"));
+import { connect } from "./database";
+import { IProduct, ProductModel } from "./models/ProductModel";
 
 const port = 8080;
 const app = express();
+
+connect();
 
 app.get("/", (req, res) => {
     res.send("hello");
 });
 
-app.get("/products", (req, res) => {
-    res.json(productList);
+app.get("/products", async (req, res) => {
+    let products: Array<IProduct> = await ProductModel.find();
+    res.json(products.map((pdoc) => {
+        return {
+            id: pdoc._id,
+            name: pdoc.name,
+            price: pdoc.price
+        };
+    }));
 });
 
 app.listen(port, () => {
