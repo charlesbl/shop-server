@@ -1,6 +1,5 @@
 import Mongoose from "mongoose"
 
-const dbUri = "mongodb+srv://shop-prod:RcsCMSldaj3CbwvC@c0.tqjgz.mongodb.net/shop?retryWrites=true&w=majority";
 const dbOptions = {
     useNewUrlParser: true,
     useFindAndModify: true,
@@ -11,7 +10,7 @@ const dbOptions = {
 let database: Mongoose.Connection;
 
 export function connect() {
-    Mongoose.connect(dbUri, dbOptions);
+    Mongoose.connect(process.env.DB_URI, dbOptions);
 
     database = Mongoose.connection;
 
@@ -22,5 +21,5 @@ export function connect() {
     database.on("error", () => {
         console.log("Error connecting to database");
     });
-  
+
 }

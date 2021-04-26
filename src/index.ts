@@ -1,9 +1,15 @@
 import express from "express";
 import { connect } from "./database";
 import { IProduct, ProductModel } from "./models/ProductModel";
+import cors from "cors";
+import dotenv from "dotenv";
 
-const port = 8080;
+dotenv.config({
+    path: `.env.${process.env.NODE_ENV}`
+})
+
 const app = express();
+app.use(cors());
 
 connect();
 
@@ -22,7 +28,7 @@ app.get("/products", async (req, res) => {
     }));
 });
 
-app.listen(port, () => {
-    console.log(`Server started at http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server started at http://localhost:${process.env.PORT}`);
 });
 
