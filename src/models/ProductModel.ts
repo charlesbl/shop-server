@@ -7,7 +7,7 @@ const ProductSchema: Schema = new Schema({
 
 export interface IProduct extends Document {
     name: string;
-    price: string; 
+    price: string;
     description: string;
 }
 

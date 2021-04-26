@@ -6,7 +6,8 @@ import dotenv from "dotenv";
 
 dotenv.config({
     path: `.env.${process.env.NODE_ENV}`
-})
+});
+console.log(`.env.${process.env.NODE_ENV}`);
 
 const app = express();
 app.use(cors());
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/products", async (req, res) => {
-    let products: Array<IProduct> = await ProductModel.find();
+    const products: IProduct[] = await ProductModel.find();
     res.json(products.map((pdoc) => {
         return {
             id: pdoc._id,
