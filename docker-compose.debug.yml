@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   shop:
-    image: shop
+    image: shop-server
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -13,10 +13,7 @@ services:
       - 3000:3000
       - 9229:9229
     volumes:
-      - type: bind
-        source: ./src
-        target: /usr/src/app/src/
-        read_only: true
+      - ./src:/usr/src/app/src/:ro
 
   mongodb:
     image: mongo:5.0
