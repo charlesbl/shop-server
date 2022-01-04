@@ -10,6 +10,7 @@ const dbOptions = {
 let database: Mongoose.Connection;
 
 export function connect() {
+    console.log(process.env.DB_URI);
     Mongoose.connect(process.env.DB_URI, dbOptions);
 
     database = Mongoose.connection;
