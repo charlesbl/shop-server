@@ -2,11 +2,21 @@ version: '3.4'
 
 services:
   shop-server:
-    image: shop
+    image: shop-server
     build:
       context: .
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: production
+      DB_URI: mongodb://user:pass@mongodb/?authSource=admin
     ports:
       - 3000:3000
+
+  mongodb:
+    image: mongo:5.0
+    environment:
+      - MONGO_INITDB_DATABASE=shop
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - 27017:27017

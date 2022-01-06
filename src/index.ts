@@ -27,11 +27,10 @@ app.get("/products", async (req, res) => {
 
 app.post("/product/add", async (req, res) => {
     console.log(req.body);
-    let product = await ProductModel.create(req.body);
+    const product = await ProductModel.create(req.body);
     res.json(product);
 });
 
 app.listen(3000, () => {
     console.log("Server started at http://localhost:3000");
 });
-

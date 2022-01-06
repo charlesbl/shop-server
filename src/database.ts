@@ -1,10 +1,7 @@
 import Mongoose from "mongoose"
 
 const dbOptions = {
-    useNewUrlParser: true,
-    useFindAndModify: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
+
 };
 
 let database: Mongoose.Connection;
