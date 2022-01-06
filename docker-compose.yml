@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  shop:
+  shop-server:
     image: shop
     build:
       context: .
