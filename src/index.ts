@@ -26,9 +26,17 @@ app.get("/products", async (req, res) => {
 });
 
 app.post("/product/add", async (req, res) => {
-    console.log(req.body);
     const product = await ProductModel.create(req.body);
     res.json(product);
+});
+
+app.delete("/product/remove/:id", async (req, res) => {
+    if (req.params.id) {
+        await ProductModel.findByIdAndRemove(req.params.id);
+        res.json(req.params.id);
+    } else {
+        res.status(404);
+    }
 });
 
 app.listen(3000, () => {
