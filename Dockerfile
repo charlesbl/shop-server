@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 COPY ./src/ ./src/
 COPY package.json package-lock.json* tsconfig.json* tslint.json* .eslintrc.js* .eslintignore ./
 RUN npm i --include=dev
-RUN npm run build 2>&1 || true
+RUN npm run build
 
 FROM node:lts-alpine
 WORKDIR /usr/src/app

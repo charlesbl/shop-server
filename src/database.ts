@@ -21,3 +21,10 @@ export function connect() {
     });
 
 }
+
+export function disconnect() {
+    if (database) {
+        database.close();
+        console.log("Disconnected to database");
+    }
+}
