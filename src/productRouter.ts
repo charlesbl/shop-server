@@ -47,7 +47,7 @@ productRouter.get("/:id", async (req, res) => {
     });
 });
 
-productRouter.post("/:id", async (req, res) => {
+productRouter.patch("/:id", async (req, res) => {
     if (!req.params.id || !Types.ObjectId.isValid(req.params.id)) {
         res.sendStatus(404);
         return;
