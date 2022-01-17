@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  shop-server:
-    image: shop-server
+  shop-server-dev:
+    image: shop-server-dev
     build:
       context: ../
       dockerfile: .devcontainer/Dockerfile
@@ -17,10 +17,12 @@ services:
     command: /bin/sh -c "while sleep 1000; do :; done"
 
   mongodb:
-    image: mongo:5.0
+    image: mongo:5.0.5
     environment:
       - MONGO_INITDB_DATABASE=shop
       - MONGO_INITDB_ROOT_USERNAME=user
       - MONGO_INITDB_ROOT_PASSWORD=pass
     ports:
       - 27017:27017
+    volumes:
+      - ../data:/data/db
