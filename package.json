@@ -6,7 +6,8 @@
     "scripts": {
         "prebuild": "eslint . --ext .js,.jsx,.ts,.tsx",
         "build": "tsc",
-        "start": "ts-node-dev --poll src/index.ts"
+        "start": "ts-node-dev --poll src/index.ts",
+        "lint": "eslint ./src"
     },
     "dependencies": {
         "@nestjs/common": "^9.1.4",
