@@ -1,4 +1,4 @@
-import Mongoose, { Connection } from "mongoose"
+import Mongoose from "mongoose"
 
 const connect = async () => {
     const dbUri = process.env.DB_URI;
