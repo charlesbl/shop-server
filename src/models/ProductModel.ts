@@ -12,4 +12,4 @@ export interface IProduct extends Document {
     price: string;
 }
 
-export const ProductModel: Model<IProduct> = model('Product', ProductSchema);
+export const ProductModel = model<IProduct>('Product', ProductSchema);
