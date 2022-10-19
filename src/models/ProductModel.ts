@@ -6,10 +6,17 @@ const ProductSchema: Schema = new Schema({
     price: { type: String, required: true }
 });
 
-export interface IProduct extends Document {
+
+export interface Product {
     name: string;
     desc: string;
     price: string;
+}
+
+export interface IProduct extends Document, Product { }
+
+export interface RestProduct extends Product {
+    id: string
 }
 
 export const ProductModel = model<IProduct>('Product', ProductSchema);
