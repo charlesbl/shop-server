@@ -2,27 +2,27 @@ import { Body, Controller, Delete, Get, Param, Put } from "@nestjs/common";
 import { ProductRest } from "../models/ProductModel";
 import { CreateProduct, ProductService } from "./ProductService";
 
-@Controller("/product")
+@Controller("product")
 export class ProductController {
     constructor(private readonly productService: ProductService) { }
 
-    @Put("/")
-    async create(@Body() createProduct: CreateProduct): Promise<ProductRest> {
-        return await this.productService.createProduct(createProduct);
+    @Get("all")
+    async getAll(): Promise<ProductRest[]> {
+        return await this.productService.getAllProduct();
     }
 
-    @Get("/:id")
+    @Put()
+    async create(@Body() createProduct: CreateProduct): Promise<ProductRest> {
+        return await this.productService.createOrEditProduct(createProduct);
+    }
+
+    @Get(":id")
     async get(@Param('id') id: string): Promise<ProductRest> {
         return await this.productService.getProduct(id)
     }
 
-    @Delete("/:id")
+    @Delete(":id")
     async delete(@Param('id') id: string): Promise<ProductRest> {
         return await this.productService.deleteProduct(id)
-    }
-
-    @Get("/all")
-    async all(): Promise<ProductRest[]> {
-        return await this.productService.getAllProduct();
     }
 }
