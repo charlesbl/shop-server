@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { IProduct, RestProduct, ProductModel } from "../models/ProductModel";
+import { ProductDocument, ProductRest, ProductModel } from "../models/ProductModel";
 
 export interface CreateProduct {
     name: string,
@@ -7,7 +7,7 @@ export interface CreateProduct {
     price: string
 }
 
-const productDocumentToRestObject = (product: IProduct): RestProduct => {
+const productDocumentToRestObject = (product: ProductDocument): ProductRest => {
     return {
         id: product.id,
         desc: product.desc,
@@ -18,15 +18,15 @@ const productDocumentToRestObject = (product: IProduct): RestProduct => {
 
 @Injectable()
 export class ProductService {
-    async getProduct(id: string): Promise<RestProduct> {
+    async getProduct(id: string): Promise<ProductRest> {
         const product = await ProductModel.findById(id)
         return productDocumentToRestObject(product)
     }
-    async getAllProduct(): Promise<RestProduct[]> {
+    async getAllProduct(): Promise<ProductRest[]> {
         return await (await ProductModel.find()).map((product) => productDocumentToRestObject(product));
     }
 
-    async createProduct(createProduct: CreateProduct): Promise<RestProduct | undefined> {
+    async createProduct(createProduct: CreateProduct): Promise<ProductRest | undefined> {
         const product = await ProductModel.create(createProduct)
         if (product.id != null) {
             return productDocumentToRestObject(product)
@@ -35,12 +35,12 @@ export class ProductService {
         }
     }
 
-    async editProduct(id: string, createProduct: CreateProduct): Promise<RestProduct> {
+    async editProduct(id: string, createProduct: CreateProduct): Promise<ProductRest> {
         const product = await ProductModel.findOneAndUpdate({ id }, createProduct, { new: true });
         return productDocumentToRestObject(product)
     }
 
-    async deleteProduct(id: string): Promise<RestProduct> {
+    async deleteProduct(id: string): Promise<ProductRest> {
         const product = await ProductModel.findByIdAndRemove(id);
         return productDocumentToRestObject(product)
     }

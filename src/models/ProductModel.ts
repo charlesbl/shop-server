@@ -13,10 +13,10 @@ export interface Product {
     price: string;
 }
 
-export interface IProduct extends Document, Product { }
+export interface ProductDocument extends Document, Product { }
 
-export interface RestProduct extends Product {
+export interface ProductRest extends Product {
     id: string
 }
 
-export const ProductModel = model<IProduct>('Product', ProductSchema);
+export const ProductModel = model<ProductDocument>('Product', ProductSchema);
