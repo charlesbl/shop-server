@@ -1,7 +1,9 @@
 import { Connection } from "mongoose";
 import DB from "./database";
 import httpServerInit from "./httpServer";
+import dotenv from "dotenv"
 
+dotenv.config()
 
 DB.connect().then(() => {
     const httpServer = httpServerInit();
