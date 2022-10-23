@@ -1,11 +1,13 @@
 import * as mongoose from 'mongoose'
-import { envConstants } from '../env.constants'
 
 export const databaseProviders = [
     {
         provide: 'DATABASE_CONNECTION',
         useFactory: async (): Promise<typeof mongoose> => {
-            return await mongoose.connect(envConstants().DB_URI)
+            if (process.env.DB_URI == null) {
+                throw new Error('DB_URI not set')
+            }
+            return await mongoose.connect(process.env.DB_URI)
         }
     }
 ]

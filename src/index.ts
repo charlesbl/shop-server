@@ -4,7 +4,10 @@ import { AppModule } from './app.modules'
 
 const start = async (): Promise<void> => {
     const app = await NestFactory.create(AppModule, { cors: true })
-    await app.listen(3001)
+    if (process.env.PORT == null) {
+        throw new Error('PORT env not set')
+    }
+    await app.listen(process.env.PORT)
 
     const handleShutdownGracefully = (): void => {
         console.info('closing server gracefully...')
