@@ -1,8 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { ProductDocument, ProductRest, ProductModel } from "../models/ProductModel";
+import { ProductDocument, ProductRest, ProductModel } from "./products.model";
 
 export interface CreateProduct {
-    id?: string
     name: string,
     desc: string,
     price: string
@@ -36,16 +35,12 @@ export class ProductService {
         }
     }
 
-    async createOrEditProduct(createProduct: CreateProduct): Promise<ProductRest> {
-        if (createProduct.id != null && createProduct.id.length > 0) {
-            const product = await ProductModel.findOneAndUpdate({ id: createProduct.id }, createProduct, { new: true });
-            if (product == null) {
-                throw new Error(`Can't edit product id: "${createProduct.id}"`)
-            }
-            return productDocumentToRestObject(product)
-        } else {
-            return await this.createProduct(createProduct)
+    async editProduct(id: string, createProduct: CreateProduct): Promise<ProductRest> {
+        const product = await ProductModel.findOneAndUpdate({ id }, createProduct, { new: true });
+        if (product == null) {
+            throw new Error(`Can't edit product id: "${id}"`)
         }
+        return productDocumentToRestObject(product)
     }
 
     async deleteProduct(id: string): Promise<ProductRest> {

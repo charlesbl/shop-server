@@ -4,8 +4,7 @@ const connect = async () => {
     const dbUri = process.env.DB_URI;
     console.log(`DB_URI: ${dbUri}`);
     if (!dbUri) {
-        console.error("DB_URI not defined");
-        return;
+        throw new Error("DB_URI not defined")
     }
 
     Mongoose.connection.once("open", async () => {

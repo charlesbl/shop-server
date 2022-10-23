@@ -1,19 +1,19 @@
-import { Body, Controller, Delete, Get, Param, Put } from "@nestjs/common";
-import { ProductRest } from "../models/ProductModel";
-import { CreateProduct, ProductService } from "./ProductService";
+import { Body, Controller, Delete, Get, Param, Post, Put, Req } from "@nestjs/common";
+import { ProductRest } from "./products.model";
+import { CreateProduct, ProductService } from "./products.service";
 
-@Controller("product")
+@Controller("products")
 export class ProductController {
     constructor(private readonly productService: ProductService) { }
 
-    @Get("all")
+    @Get()
     async getAll(): Promise<ProductRest[]> {
         return await this.productService.getAllProduct();
     }
 
-    @Put()
+    @Post()
     async create(@Body() createProduct: CreateProduct): Promise<ProductRest> {
-        return await this.productService.createOrEditProduct(createProduct);
+        return await this.productService.createProduct(createProduct);
     }
 
     @Get(":id")

@@ -1,14 +1,13 @@
 import DB from "./database";
 import dotenv from "dotenv"
 import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app/AppModule";
+import { AppModule } from "./app/app.modules";
 
 dotenv.config()
 
 DB.connect().then(async () => {
     const app = await NestFactory.create(AppModule, { cors: true });
     await app.listen(3001);
-
 
     const handleShutdownGracefully = () => {
         console.info("closing server gracefully...");
