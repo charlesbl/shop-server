@@ -1,10 +1,8 @@
 
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.modules'
-import dotenv from 'dotenv'
 
 const start = async (): Promise<void> => {
-    dotenv.config()
     const app = await NestFactory.create(AppModule, { cors: true })
     await app.listen(3001)
 

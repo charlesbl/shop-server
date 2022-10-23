@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common'
+import { AuthGuard } from '@nestjs/passport'
 import { Product } from './products.model'
 import { CreateProduct, ProductsService } from './products.service'
 
@@ -11,6 +12,7 @@ export class ProductsController {
         return await this.productService.getAllProduct()
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Post()
     public async create (@Body() createProduct: CreateProduct): Promise<Product> {
         return await this.productService.createProduct(createProduct)
