@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  shop-server:
+    image: shop-server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - DB_URI=mongodb://user:pass@host.docker.internal/shop?authSource=admin
+      - JWT_SECRET=secretKey
+      - PORT=3001
+    ports:
+      - 3001:3001
+    extra_hosts:
+      - host.docker.internal:host-gateway

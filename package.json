@@ -7,6 +7,9 @@
         "prebuild": "eslint . --ext .js,.jsx,.ts,.tsx",
         "build": "tsc",
         "dev": "ts-node-dev --poll src/index.ts",
+        "docker:bd": "docker-compose -f docker-compose.bd.yml up",
+        "docker:app": "docker-compose -f docker-compose.app.yml up",
+        "docker:all": "docker-compose -f docker-compose.bd.yml -f docker-compose.app.yml up",
         "lint": "eslint ./src"
     },
     "dependencies": {
